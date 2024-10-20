@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signOut, type User } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAnLYM8liWqTD4HNM9Bmrg1zZX2-lezNKA",
@@ -17,6 +18,9 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 // 初始化firestore
 const firestore = getFirestore(firebaseApp);
+
+// 初始化storage
+const storage = getStorage();
 
 // 初始化auth
 const auth = getAuth(firebaseApp);
@@ -79,4 +83,4 @@ const saveToFirestore = async (updateData: object) => {
     }
 };
 
-export { firebaseApp, firestore, auth, registerUser, fetchUserData, getUserDocRef, saveToFirestore };
+export { firebaseApp, firestore, storage, auth, registerUser, fetchUserData, getUserDocRef, saveToFirestore };
