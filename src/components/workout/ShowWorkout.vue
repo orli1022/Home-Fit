@@ -67,14 +67,9 @@ onBeforeRouteLeave((to, from, next) => {
         </div>
 
         <div class="card-header p-4 d-flex justify-content-end">
-            <div>
-                <button type="button" class="btn btn-outline-light" @click="editWorkout(plan.id)">
-                    <i class="bi bi-pencil"></i> 修改
-                </button>
-                <button type="button" class="btn btn-outline-light ms-3">
-                    <i class="bi bi-share"></i> 分享
-                </button>
-            </div>
+            <button type="button" class="btn btn-outline-light" @click="editWorkout(plan.id)">
+                <i class="bi bi-pencil"></i> 修改
+            </button>
         </div>
     </div>
 

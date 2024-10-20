@@ -122,15 +122,10 @@ onMounted(() => {
             </div>
         </div>
         <div class="card-header p-4 d-flex justify-content-end">
-            <div>
-                <button v-if="!isSuccessful" type="button" class="btn btn-outline-light"
-                    @click="editChallenge(challenge.id)">
-                    <i class="bi bi-pencil"></i> 修改
-                </button>
-                <button type="button" class="btn btn-outline-light ms-3">
-                    <i class="bi bi-share"></i> 分享
-                </button>
-            </div>
+            <button v-if="!isSuccessful" type="button" class="btn btn-outline-light"
+                @click="editChallenge(challenge.id)">
+                <i class="bi bi-pencil"></i> 修改
+            </button>
         </div>
     </div>
 </template>
