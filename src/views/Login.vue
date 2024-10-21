@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { auth } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import type { FirebaseError } from "firebase/app";
 const router = useRouter();
 
@@ -44,6 +44,30 @@ const login = async () => {
         }
     }
 }
+
+// 忘記密碼
+const forgotPassword = async () => {
+    try {
+        // 嘗試發送重設密碼郵件
+        await sendPasswordResetEmail(auth, email.value);
+        message.value = "密碼重設郵件已成功發送！請檢查您的信箱";
+    } catch (error) {
+        const firebaseError = error as FirebaseError;
+        console.log("Firebase error code:", firebaseError.code);
+        switch (firebaseError.code) {
+            case "auth/invalid-email":
+                message.value = "請輸入有效的電子郵件";
+                break;
+            case "auth/too-many-requests":
+                message.value = "請求次數過多，請稍後再試";
+                break;
+            default:
+                message.value = "密碼重設郵件發送失敗，請稍後再試一次";
+                break;
+        }
+    }
+};
+
 </script>
 
 <template>
@@ -69,7 +93,7 @@ const login = async () => {
                     </button>
                 </div>
                 <div class="text-end mb-4">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">忘記密碼</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="forgotPassword">忘記密碼</button>
                 </div>
                 <button type="submit" class="btn btn-lg btn-dark w-100 mb-4">登入</button>
                 <div class="d-flex justify-content-center">
