@@ -51,10 +51,16 @@ export const useHomeStore = defineStore("home", () => {
         }
     };
 
+    // 重置打卡狀態
+    const clearWorkoutDays = () => {
+        workoutDays.value = [];
+        isTodayWorkout.value = false;
+    };
+
     onMounted(() => {
         generateDays();
         initWorkoutDays();
     });
 
-    return {workoutDays, daysInMonth, isTodayWorkout, todayWorkout}
+    return {workoutDays, daysInMonth, isTodayWorkout, todayWorkout, clearWorkoutDays}
 })

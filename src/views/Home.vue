@@ -1,14 +1,13 @@
 <script setup lang="ts" name="Home">
 import { ref, computed, onMounted } from 'vue';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, fetchUserData, saveToFirestore } from "@/firebase";
+import { auth, fetchUserData } from "@/firebase";
 import { useHomeStore } from "@/stores/home";
 
 const homeStore = useHomeStore();
 
 const username = ref("");
 const userPic = ref("");
-const workoutDays = ref<number[]>([]);
 const message = computed(() => {
     return homeStore.workoutDays.length > 0
         ? `這個月已經運動 ${homeStore.workoutDays.length} 天了，繼續加油吧！`
@@ -24,7 +23,8 @@ onMounted(() => {
                 if (userData) {
                     username.value = userData.username;
                     userPic.value = userData.userPicUrl;
-                    workoutDays.value = userData.workoutDays;
+
+                    homeStore.workoutDays = userData.workoutDays;
 
                     const today = new Date().getDate();
                     homeStore.isTodayWorkout = userData.workoutDays.includes(today);
@@ -32,6 +32,8 @@ onMounted(() => {
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
+        } else {
+            homeStore.clearWorkoutDays();
         }
     });
 });
