@@ -112,7 +112,7 @@ const clearForm = () => {
                 @submit.prevent="register">
                 <div class="text-center mb-4">
                     <h2 class="fw-bold">建立新帳號</h2>
-                    <p class="msg text-muted mt-3">{{ message }}</p>
+                    <p class="text-muted mt-3">{{ message }}</p>
                 </div>
                 <div class="form-floating mb-4">
                     <input type="text" class="form-control" placeholder="name@example.com" v-model="username" required>
@@ -140,7 +140,7 @@ const clearForm = () => {
                 </div>
 
                 <div class="form-floating mb-4">
-                    <input type="password" class="form-control" placeholder="Password" v-model="confirmPassword"
+                    <input type="password" class="form-control" placeholder="confirmPassword" v-model="confirmPassword"
                         required>
                     <label class="text-muted">確認密碼</label>
                 </div>
