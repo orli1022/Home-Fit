@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { registerUser } from "@/firebase";
+import type { FirebaseError } from "firebase/app";
 import defaultUserPic from "@/assets/default-user-pic.svg";
 
 const router = useRouter();
@@ -73,7 +74,8 @@ const register = async () => {
             clearForm();
             router.push({ name: "Login" });
         } else {
-            switch (result.error) {
+            const firebaseError = result.error as FirebaseError;
+            switch (firebaseError.code) {
                 case "auth/invalid-email":
                     message.value = "請輸入有效的電子郵件";
                     break;
