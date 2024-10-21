@@ -55,7 +55,6 @@ watchEffect(() => {
                 @deleteId="deleteData">
             </ChallengeCard>
         </div>
-
         <div class="text-center position-absolute mx-auto start-0 end-0" style="bottom: 25px;">
             <button type="button" class="btn btn-outline-secondary btn-lg">
                 <RouterLink to="/createChallenge" class="dropdown-item">
@@ -66,5 +65,3 @@ watchEffect(() => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

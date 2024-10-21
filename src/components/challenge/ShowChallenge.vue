@@ -59,7 +59,6 @@ onMounted(() => {
         isSuccessful.value = true;
     }
 })
-
 </script>
 
 <template>
@@ -79,7 +78,6 @@ onMounted(() => {
                     </span>
                 </div>
             </div>
-
             <div v-if="challenge.videoId">
                 <div class="p-4 border-bottom">
                     <h6 class="fw-bold mb-3 section-title ">
@@ -92,7 +90,6 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-
             <div class="p-4 border-bottom">
                 <h6 class="fw-bold mb-3 section-title">
                     <i class="bi bi-calendar-event me-2"></i>挑戰天數
@@ -112,7 +109,6 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div v-if="!isSuccessful" class="text-center my-4">
                     <button type="button" class="btn btn-light" @click="addDay(challenge.id)">
@@ -129,5 +125,3 @@ onMounted(() => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

@@ -5,8 +5,8 @@ import ChooseVideoModal from "@/components/video/ChooseVideoModal.vue";
 import { useCreateChallengeStore } from "@/stores/createChallenge";
 
 const createChallengeStore = useCreateChallengeStore();
-const route = useRoute()
 
+const route = useRoute()
 
 const challengeId = Number(route.params.id);
 const challengeIndex = createChallengeStore.challengeList.findIndex(challenge => challenge.id === challengeId);
@@ -16,7 +16,6 @@ const challengeContent = ref(thisChallenge.content);
 const challengeDays = ref(thisChallenge.days);
 const challengeVideoId = ref(thisChallenge.videoId);
 const isVisible = ref(false);
-
 
 // 更新選擇影片的id
 const handleData = (id: string) => {
@@ -102,10 +101,8 @@ const updateChallenge = () => {
                     </div>
                 </div>
                 <div class="d-flex justify-content-end my-5">
-                    <!-- <button type="button" class="btn btn-outline-secondary btn-lg"> -->
                     <RouterLink to="/challengeList" class="btn btn-dark ms-4">返回清單
                     </RouterLink>
-                    <!-- </button> -->
                     <button type="submit" class="btn btn-dark ms-4">更新挑戰</button>
                 </div>
                 <p class="text-transition text-center fw-bold" :class="{ 'text-light': isVisible }"

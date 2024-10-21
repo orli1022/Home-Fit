@@ -1,6 +1,5 @@
 <script setup lang="ts" name="ChooseVideoModal">
 import { ref, computed } from "vue";
-// import { defineEmits } from "vue";
 import { useAddVideoStore } from "@/stores/addVideo";
 const emit = defineEmits();
 const addVideoStore = useAddVideoStore();
@@ -35,7 +34,6 @@ const chooseVideo = (id: string) => {
     const chooseid = id;
     emit("updateId", chooseid);
 }
-
 </script>
 
 <template>
@@ -60,14 +58,12 @@ const chooseVideo = (id: string) => {
                             <button class="dropdown-item" @click="changeSelectText('力量訓練-下肢')">力量訓練-下肢</button>
                         </div>
                     </div>
-
                     <div v-if="addVideoStore.videoList.length <= 0" class="text-center p-4 m-5">
                         <h3 class="text-secondary pb-5 pt-1">尚未加入任何影片</h3>
                     </div>
                     <div v-else-if="categoryList.length <= 0" class="text-center p-4 m-5">
                         <h3 class="text-secondary pb-5 pt-1">該分類暫無影片</h3>
                     </div>
-
                     <div class="d-flex overflow-auto">
                         <div class="card me-3 mb-4" style="min-width: 200px;" v-for="(video, index) in categoryList"
                             :key="index">
@@ -86,5 +82,3 @@ const chooseVideo = (id: string) => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

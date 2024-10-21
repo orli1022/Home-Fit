@@ -4,7 +4,6 @@ import { Modal } from "bootstrap";
 
 const router = useRouter();
 
-
 // 當前的plan
 const props = defineProps({
     plan: {
@@ -22,7 +21,6 @@ const editWorkout = (id: number) => {
     router.push({ name: "EditWorkout", params: { id: id } });
 }
 
-
 // 關閉modal
 onBeforeRouteLeave((to, from, next) => {
     const modalElement = document.querySelector('.modal.show');
@@ -34,7 +32,6 @@ onBeforeRouteLeave((to, from, next) => {
     }
     next();
 });
-
 </script>
 
 <template>
@@ -43,7 +40,6 @@ onBeforeRouteLeave((to, from, next) => {
             <h3 class="fw-bold m-0"><i class="fs-3 bi me-3" :class="[plan.icon]"></i>{{ plan.name }}</h3>
             <button type="button" class="btn-close my-auto" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
         <div class="card-body mx-3 mt-5 row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
             <div v-for="(day, index) in weekDaysName" :key="index" class="col">
                 <div class="card weekday-card">
@@ -65,14 +61,12 @@ onBeforeRouteLeave((to, from, next) => {
                 </div>
             </div>
         </div>
-
         <div class="card-header p-4 d-flex justify-content-end">
             <button type="button" class="btn btn-outline-light" @click="editWorkout(plan.id)">
                 <i class="bi bi-pencil"></i> 修改
             </button>
         </div>
     </div>
-
 </template>
 
 <style scoped>

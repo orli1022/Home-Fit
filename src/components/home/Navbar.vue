@@ -1,6 +1,4 @@
-<script setup lang="ts" name="Navbar">
-
-</script>
+<script setup lang="ts" name="Navbar"></script>
 
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -63,5 +61,3 @@
         </div>
     </nav>
 </template>
-
-<style scoped></style>

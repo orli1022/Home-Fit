@@ -5,7 +5,6 @@ import VideoCard from "./VideoCard.vue";
 import { useAddVideoStore } from "@/stores/addVideo";
 
 const addVideoStore = useAddVideoStore();
-
 const activeSlot = ref("slotWorkoutPlan");
 
 let selectType = ref("全部");
@@ -38,7 +37,6 @@ const removeVideo = (id: number) => {
     const videoId = id;
     addVideoStore.deleteVideo(videoId);
 }
-
 </script>
 
 <template>
@@ -60,14 +58,12 @@ const removeVideo = (id: number) => {
                     </div>
                 </div>
             </div>
-
             <div v-if="addVideoStore.videoList.length <= 0" class="text-center position-absolute top-50 start-0 end-0">
                 <h3 class="text-secondary">尚未加入任何影片</h3>
             </div>
             <div v-else-if="categoryList.length <= 0" class="text-center position-absolute top-50 start-0 end-0">
                 <h3 class="text-secondary">該分類暫無影片</h3>
             </div>
-
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5 g-md-4 mx-auto my-3 my-md-5">
                 <VideoCard v-for="(video, index) in categoryList" :key="index" :video="video"
                     @deleteVideo="removeVideo(video.id)">
@@ -75,7 +71,4 @@ const removeVideo = (id: number) => {
             </div>
         </div>
     </slot>
-
 </template>
-
-<style scoped></style>

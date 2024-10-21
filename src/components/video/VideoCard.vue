@@ -25,7 +25,6 @@ const selectType = (id: number, type: string) => {
     chooseType.value = type;
     addVideoStore.updateType(id, chooseType.value);
 }
-
 </script>
 
 <template>
@@ -53,5 +52,3 @@ const selectType = (id: number, type: string) => {
         </div>
     </div>
 </template>
-
-<style scoped></style>
