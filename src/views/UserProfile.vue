@@ -19,7 +19,6 @@ const newPassword = ref("");
 const confirmPassword = ref("");
 const strengthPct = ref(0); // 密碼強度
 const isPasswordVisible = ref(false); // 隱藏/顯示密碼
-const originalUserInfo = ref({ username: "", userPic: "" }); // 原始資料
 const message = ref("");
 
 // 切換密碼顯示或隱藏
@@ -37,12 +36,6 @@ onMounted(() => {
                     username.value = userData.username;
                     email.value = userData.email;
                     userPic.value = userData.userPicUrl;
-
-                    // 保存原始資料
-                    originalUserInfo.value = {
-                        username: userData.username,
-                        userPic: userData.userPicUrl
-                    };
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -122,14 +115,25 @@ const updateUserInfo = async () => {
 }
 
 // 清空表單, 恢復原本的資料
-const clearForm = () => {
-    username.value = originalUserInfo.value.username;
-    userPic.value = originalUserInfo.value.userPic;
-    selectedFile.value = null;
-    oldPassword.value = "";
-    newPassword.value = "";
-    confirmPassword.value = "";
-    message.value = "";
+const clearForm = async () => {
+    const user = auth.currentUser;
+    if (user) {
+        try {
+            const userData = await fetchUserData(user);
+            if (userData) {
+                username.value = userData.username;
+                userPic.value = userData.userPicUrl;
+
+                selectedFile.value = null;
+                oldPassword.value = "";
+                newPassword.value = "";
+                confirmPassword.value = "";
+                message.value = "";
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    }
 }
 
 // 檢查密碼強度
