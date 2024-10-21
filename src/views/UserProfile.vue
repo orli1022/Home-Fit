@@ -49,8 +49,8 @@ onMounted(() => {
                 console.error("Error fetching user data:", error);
             }
         }
-    });
-});
+    })
+})
 
 // 登出
 const logout = () => {
@@ -61,8 +61,8 @@ const logout = () => {
         })
         .catch((error) => {
             console.error("登出失敗：", error);
-        });
-};
+        })
+}
 
 // 選擇圖片檔案
 const selectFile = (event: Event) => {
@@ -81,7 +81,7 @@ const selectFile = (event: Event) => {
             // 將讀取完成的圖片資料(Data URL)存在userPic
             // 使用optional chaing(?.)避免e.target可能為null的情況
             userPic.value = e.target?.result as string;
-        };
+        }
 
         // 讀取圖片，將檔案轉換為Data URL的格式
         reader.readAsDataURL(selectedFile.value);
@@ -171,7 +171,7 @@ const checkPwStrength = () => {
             strengthPct.value = 100;
             break;
     }
-};
+}
 
 // 更新密碼
 const updatePw = async () => {
@@ -205,7 +205,7 @@ const updatePw = async () => {
             }
         }
     }
-};
+}
 
 // 驗證電子郵件
 const sendVerificationEmail = async () => {
@@ -220,8 +220,7 @@ const sendVerificationEmail = async () => {
     } else {
         console.log("您的電子郵件已驗證");
     }
-};
-
+}
 </script>
 
 <template>
@@ -279,7 +278,6 @@ const sendVerificationEmail = async () => {
                                     :class="isVerify ? 'bi-check-circle text-success' : 'bi-exclamation-circle text-muted'"></i>
                             </div>
                         </div>
-
                         <div class="mb-5 text-muted">
                             <p>安全性設定</p>
                             <p>{{ verifyMsg }}</p>
@@ -287,7 +285,6 @@ const sendVerificationEmail = async () => {
                                 class="btn btn-light w-100 d-flex justify-content-between text-muted mb-2"
                                 @click="sendVerificationEmail"><span><i class="bi bi-envelope-check"></i>
                                     驗證電子郵件</span><span><i class="bi bi-arrow-right"></i></span></button>
-
                             <button class="btn btn-light w-100 d-flex justify-content-between text-muted"
                                 data-bs-toggle="modal" data-bs-target="#updatePasswordModal"><span><i
                                         class="bi bi-shield-lock"></i> 修改密碼</span><span><i
@@ -303,7 +300,6 @@ const sendVerificationEmail = async () => {
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="updatePasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="updatePasswordModal" aria-hidden="true">
@@ -355,5 +351,3 @@ const sendVerificationEmail = async () => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

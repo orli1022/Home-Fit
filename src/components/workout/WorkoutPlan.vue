@@ -86,7 +86,6 @@ const showMessage = () => {
                         <button class="btn me-3 rounded-circle btn-light text-secondary" data-bs-toggle="dropdown">
                             <i class="bi fs-3" :class="[selectIcon]"></i>
                         </button>
-
                         <div class="dropdown-menu">
                             <button class="dropdown-item text-secondary"
                                 @click="changeSelectIcon('bi-pin-angle-fill')"><i
@@ -104,10 +103,8 @@ const showMessage = () => {
                         </div>
                         <h4 class="mb-0 text-center" style="height: 27px;">{{ planName }}
                         </h4>
-
                     </div>
                     <div class="card-body p-0">
-
                         <div class="accordion">
                             <div class="accordion-item" v-for="(title, index) in weekDaysTitle" :key="index">
                                 <h2 class="accordion-header" :id="'heading' + index + 1">

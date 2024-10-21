@@ -11,12 +11,12 @@ const message = ref("");
 // 分類planList
 const categoryList = computed(() => {
     return showAll.value ? workoutPlanStore.planList : workoutPlanStore.favoriteList;
-});
+})
 
 // 選擇類別
 const changeSelect = (value: boolean) => {
     showAll.value = value;
-};
+}
 
 // 刪除課表
 const deleteData = (id: number) => {
@@ -34,8 +34,7 @@ watchEffect(() => {
     else {
         message.value = "";
     }
-});
-
+})
 </script>
 
 <template>
@@ -69,5 +68,3 @@ watchEffect(() => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

@@ -1,6 +1,4 @@
-<script setup lang="ts" name="BottomBar">
-
-</script>
+<script setup lang="ts" name="BottomBar"></script>
 
 <template>
     <div class="container py-4">
@@ -12,5 +10,3 @@
         </div>
     </div>
 </template>
-
-<style scoped></style>

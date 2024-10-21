@@ -31,5 +31,3 @@ const addVideo = () => {
         <button class="btn btn-outline-secondary" type="button" @click="addVideo">新增</button>
     </div>
 </template>
-
-<style scoped></style>

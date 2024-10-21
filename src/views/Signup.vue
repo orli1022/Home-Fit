@@ -103,7 +103,6 @@ const clearForm = () => {
     password.value = "";
     confirmPassword.value = "";
 }
-
 </script>
 
 <template>
@@ -119,13 +118,11 @@ const clearForm = () => {
                 <div class="form-floating mb-4">
                     <input type="text" class="form-control" placeholder="name@example.com" v-model="username" required>
                     <label class="text-muted">使用者名稱</label>
-
                 </div>
                 <div class="form-floating mb-4">
                     <input type="email" class="form-control" placeholder="name@example.com" v-model="email" required>
                     <label class="text-muted">電子郵件</label>
                 </div>
-
                 <div class="form-floating mb-4 position-relative">
                     <input :type="isPasswordVisible ? 'text' : 'password'" class="form-control" placeholder="Password"
                         v-model="password" @input="checkPwStrength" required>
@@ -140,7 +137,6 @@ const clearForm = () => {
                         <i class="fs-5" :class="isPasswordVisible ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                     </button>
                 </div>
-
                 <div class="form-floating mb-4">
                     <input type="password" class="form-control" placeholder="confirmPassword" v-model="confirmPassword"
                         required>
@@ -159,5 +155,3 @@ const clearForm = () => {
         </div>
     </div>
 </template>
-
-<style scoped></style>

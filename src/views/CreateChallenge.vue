@@ -114,7 +114,6 @@ const submitChallenge = () => {
                     <i class="bi bi-arrow-right ms-1"></i>
                 </RouterLink>
             </button>
-
         </div>
         <ChooseVideoModal @updateId="handleData"></ChooseVideoModal>
     </div>
