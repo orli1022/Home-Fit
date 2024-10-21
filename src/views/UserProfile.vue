@@ -1,7 +1,7 @@
 <script setup lang="ts" name="UserProfile">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { signOut, onAuthStateChanged, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import { signOut, onAuthStateChanged, updatePassword, EmailAuthProvider, reauthenticateWithCredential, sendEmailVerification } from "firebase/auth";
 import { auth, fetchUserData, saveToFirestore, storage } from "@/firebase";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
 import type { FirebaseError } from "firebase/app";
@@ -20,6 +20,8 @@ const confirmPassword = ref("");
 const strengthPct = ref(0); // 密碼強度
 const isPasswordVisible = ref(false); // 隱藏/顯示密碼
 const message = ref("");
+const isVerify = ref(); // 電子郵件是否驗證
+const verifyMsg = ref("");
 
 // 切換密碼顯示或隱藏
 const changePwVisibility = () => {
@@ -36,6 +38,12 @@ onMounted(() => {
                     username.value = userData.username;
                     email.value = userData.email;
                     userPic.value = userData.userPicUrl;
+                }
+
+                if (user.emailVerified) {
+                    isVerify.value = true;
+                } else {
+                    isVerify.value = false;
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -198,6 +206,22 @@ const updatePw = async () => {
         }
     }
 };
+
+// 驗證電子郵件
+const sendVerificationEmail = async () => {
+    const user = auth.currentUser;
+    if (user && !user.emailVerified) {
+        try {
+            await sendEmailVerification(user);
+            verifyMsg.value = "驗證郵件已發送，請檢查您的郵件收件箱";
+        } catch (error) {
+            verifyMsg.value = "發送驗證郵件失敗，請稍後再試";
+        }
+    } else {
+        console.log("您的電子郵件已驗證");
+    }
+};
+
 </script>
 
 <template>
@@ -246,14 +270,24 @@ const updatePw = async () => {
                             <label class="text-muted">使用者名稱</label>
 
                         </div>
-                        <div class="form-floating pb-4 mb-4 border-bottom">
+                        <div class="form-floating pb-4 mb-4 border-bottom position-relative">
                             <input type="email" class="form-control" placeholder="name@example.com" v-model="email"
                                 readonly>
                             <label class="text-muted">電子郵件</label>
+                            <div class="position-absolute end-0 me-2 mt-2" style="top: 5px;">
+                                <i class="fs-5 bi"
+                                    :class="isVerify ? 'bi-check-circle text-success' : 'bi-exclamation-circle text-muted'"></i>
+                            </div>
                         </div>
 
-                        <div class="mb-5">
-                            <p class="text-muted">安全性設定</p>
+                        <div class="mb-5 text-muted">
+                            <p>安全性設定</p>
+                            <p>{{ verifyMsg }}</p>
+                            <button v-if="!isVerify"
+                                class="btn btn-light w-100 d-flex justify-content-between text-muted mb-2"
+                                @click="sendVerificationEmail"><span><i class="bi bi-envelope-check"></i>
+                                    驗證電子郵件</span><span><i class="bi bi-arrow-right"></i></span></button>
+
                             <button class="btn btn-light w-100 d-flex justify-content-between text-muted"
                                 data-bs-toggle="modal" data-bs-target="#updatePasswordModal"><span><i
                                         class="bi bi-shield-lock"></i> 修改密碼</span><span><i
