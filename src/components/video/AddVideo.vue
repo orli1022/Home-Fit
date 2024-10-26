@@ -9,6 +9,18 @@ const inputUrl = ref("");
 // 解析youtube影片網址, 找出videoId
 function parseUrl(videoUrl: string) {
     const url = new URL(videoUrl);
+
+    // 若為 youtu.be 短連結 (手機版)，則 videoId 是 pathname 的第一部分
+    if (url.hostname === "youtu.be") {
+        return url.pathname.substring(1);
+    }
+
+    // 若為 YouTube shorts 連結 (shorts)，則 videoId 是 pathname 中 "/shorts/" 後的部分
+    if (url.pathname.startsWith("/shorts/")) {
+        return url.pathname.split("/")[2];
+    }
+
+    // 若為標準 YouTube 連結，則從 search params 中取得 videoId
     const params = new URLSearchParams(url.search);
     return params.get("v");
 }
