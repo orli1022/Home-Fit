@@ -18,6 +18,7 @@ const message = computed(() => {
 onMounted(() => {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
+            await homeStore.checkMonth(); // 檢查月份是否更新
             try {
                 const userData = await fetchUserData(user);
                 if (userData) {

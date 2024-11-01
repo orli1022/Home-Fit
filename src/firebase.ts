@@ -37,6 +37,7 @@ const registerUser = async (username: string, email: string, password: string, u
             username: username,
             email: email,
             userPicUrl: userPicUrl,
+            WorkoutMonth: new Date().getMonth() + 1,
             workoutDays: [],
             videoList: [],
             planList: [],

@@ -6,9 +6,10 @@ export const useHomeStore = defineStore("home", () => {
     const workoutDays = ref<number[]>([]); // 有打卡的日期
     const daysInMonth = ref<number[]>([]); // 存放當月的天數
     const isTodayWorkout = ref(false); // 今日是否打卡
+    const currentMonth = new Date().getMonth() + 1; // 當月月份
 
     // 獲取當前月份的天數 
-    const generateDays = () => {
+    const generateDays = async () => {
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
         const days = new Date(year, month, 0).getDate(); // 0會返回最後一天
@@ -16,6 +17,29 @@ export const useHomeStore = defineStore("home", () => {
             daysInMonth.value.push(i);
         }
     };
+
+    // 檢查月份並清除上個月的紀錄
+    const checkMonth = async () => {
+        const user = auth.currentUser;
+        if (user) {
+            try {
+                const userData = await fetchUserData(user);
+                if (userData && userData.workoutMonth) {
+                    const lastMonth = userData.workoutMonth; // 原本儲存的月份
+
+                    if (lastMonth !== currentMonth) {
+                        clearWorkoutDays();
+                        await saveToFirestore({
+                            workoutMonth: currentMonth,
+                            workoutDays: workoutDays.value
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        }
+    }
 
     // 今日打卡
     const todayWorkout = async () => {
@@ -62,5 +86,5 @@ export const useHomeStore = defineStore("home", () => {
         initWorkoutDays();
     });
 
-    return {workoutDays, daysInMonth, isTodayWorkout, todayWorkout, clearWorkoutDays}
+    return {workoutDays, daysInMonth, isTodayWorkout, checkMonth, todayWorkout, clearWorkoutDays}
 })
