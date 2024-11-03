@@ -43,7 +43,7 @@ const deletePlan = (id: number) => {
                         :class="{ 'bi-star-fill': plan.isFavorite, 'bi-star': !plan.isFavorite }"></i>
                     收藏</button>
                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                    :data-bs-target="'#showModal' + plan.id">查看挑戰</button>
+                    :data-bs-target="'#showModal' + plan.id">查看課表</button>
             </div>
         </div>
         <div class="modal fade" tabindex="-1" role="dialog" :id="'showModal' + plan.id" aria-hidden="true">
